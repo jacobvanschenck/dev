@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# prerequisits
+xcode-select --install
+brew install ninja cmake gettext curl
+
+git clone -b v0.10.3 https://github.com/neovim/neovim.git $HOME/neovim
+cd ~/neovim
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+
