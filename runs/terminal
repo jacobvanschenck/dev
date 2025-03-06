@@ -1,0 +1,10 @@
+#!/bin/bash
+
+brew install eza
+brew install fzf
+brew install ripgrep
+
+brew install jesseduffield/lazygit/lazygit
+
+brew install docker
+

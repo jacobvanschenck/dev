@@ -1,0 +1,11 @@
+#!/bin/bash
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+nvm install node # "node" is an alias for the latest version
+
+# pnpm
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+#bun
+curl -fsSL https://bun.sh/install | bash
