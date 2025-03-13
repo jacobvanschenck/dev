@@ -1,8 +1,3 @@
-import = [
-    # "~/.config/alacritty/themes/themes/catppuccin.toml"
-    # "~/.config/alacritty/themes/themes/rose-pine-moon.toml"
-    "~/.config/alacritty/themes/themes/rose-pine.toml"
-]
 
 [env]
 TERM = "xterm-256color"
@@ -27,5 +22,10 @@ size = 16
 bindings = [
   { key = "NumpadEnter", chars = "\r" },
   { key = "Back", mods = "Command", chars = "\u0015"}
+]
+
+[general]
+import = [
+  "~/.config/alacritty/themes/rose-pine.toml"
 ]
 
