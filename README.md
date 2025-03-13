@@ -19,9 +19,22 @@ The `run` script:
    git clone https://github.com/yourusername/yourrepo.git
    cd yourrepo
    ```
-2. Run the installation:
 
-   - To execute all scripts:
+2. Copy over the dev-env
+
+   ```bash
+   ./dev-env
+   ```
+
+3. Run the installation:
+
+   - Install Homebrew
+
+   ```bash
+   ./run homebrew
+   ```
+
+   - Execute all other scripts:
 
    ```bash
    ./run
