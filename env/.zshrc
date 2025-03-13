@@ -95,9 +95,3 @@ alias ytt='~/scripts/get_youtube_title_from_url.sh'
 alias c='clear'
 alias n='nvim .'
 alias lg='lazygit'
-
-# Elixir Bullshit
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-fpath=($(brew --prefix)/opt/asdf/fpath $fpath)
-autoload -Uz compinit
-compinit
