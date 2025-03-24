@@ -4,6 +4,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 nvm install node # "node" is an alias for the latest version
 
+# yarn
+npm install --global yarn
+
 # pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 

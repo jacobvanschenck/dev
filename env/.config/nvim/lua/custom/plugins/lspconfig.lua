@@ -205,6 +205,17 @@ return {
 				on_attach = on_attach,
 			})
 
+			lsp["eslint"].setup({
+				handlers = handlers,
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end,
+			})
+
 			-- configure lua server (with special settings)
 			lsp["lua_ls"].setup({
 				handlers = handlers,

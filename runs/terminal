@@ -3,6 +3,7 @@
 brew install eza
 brew install fzf
 brew install ripgrep
+brew install tree
 
 brew install powerlevel10k
 brew install zsh-autosuggestions

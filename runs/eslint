@@ -1,0 +1,3 @@
+#!/bin/bash
+
+brew install eslint_d
