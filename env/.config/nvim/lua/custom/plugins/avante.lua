@@ -21,14 +21,6 @@ return {
 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 		{
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({})
-			end,
-		},
-		{
 			-- Make sure to set this up properly if you have lazy=true
 			"MeanderingProgrammer/render-markdown.nvim",
 			opts = {
