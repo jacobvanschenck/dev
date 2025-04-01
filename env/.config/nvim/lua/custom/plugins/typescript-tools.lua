@@ -1,22 +1,34 @@
 return {
-	"pmizio/typescript-tools.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-	config = function()
-		local typescript_tools = require("typescript-tools")
-
-		typescript_tools.setup({})
-
-		vim.keymap.set(
-			"n",
-			"<leader>oi",
-			"<cmd>TSToolsOrganizeImports<cr>",
-			{ desc = "Sorts and removes unused imports" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>rf",
-			"<cmd>TSToolsRenameFile<cr>",
-			{ desc = "Renames file and apply changes to connected file" }
-		)
-	end,
+	-- "pmizio/typescript-tools.nvim",
+	-- dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- config = function()
+	-- 	local typescript_tools = require("typescript-tools")
+	--
+	-- 	typescript_tools.setup({
+	-- 		on_attach = function(_, bufnr)
+	-- 			local opts = { noremap = true, silent = true, buffer = bufnr }
+	--
+	-- 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
+	-- 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+	-- 			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+	-- 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+	-- 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+	-- 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+	-- 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+	-- 		end,
+	-- 	})
+	--
+	-- 	vim.keymap.set(
+	-- 		"n",
+	-- 		"<leader>oi",
+	-- 		"<cmd>TSToolsOrganizeImports<cr>",
+	-- 		{ desc = "Sorts and removes unused imports" }
+	-- 	)
+	-- 	vim.keymap.set(
+	-- 		"n",
+	-- 		"<leader>rf",
+	-- 		"<cmd>TSToolsRenameFile<cr>",
+	-- 		{ desc = "Renames file and apply changes to connected file" }
+	-- 	)
+	-- end,
 }
