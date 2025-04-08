@@ -5,12 +5,17 @@ return {
 	config = function()
 		require("copilot").setup({
 			suggestion = {
-				auto_trigger = true,
+				enabled = true,
+				auto_trigger = false,
+				hide_during_completion = false,
+				debounce = 25,
 				keymap = {
-					accept = "<M-a>",
-					next = "<M-]>",
-					prev = "<M-[>",
-					dismiss = "<C-]>",
+					accept = false,
+					accept_word = false,
+					accept_line = "<Tab>",
+					next = false,
+					prev = false,
+					dismiss = false,
 				},
 			},
 		})
