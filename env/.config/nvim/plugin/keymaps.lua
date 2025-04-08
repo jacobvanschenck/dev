@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
 -- jj to exit
-keymap.set("i", "jj", "<Esc>")
+keymap.set("i", "<C-c>", "<Esc>")
 
 -- clear search highlights
 -- keymap.set("n", "<Esc>", ":nohl<CR>")
@@ -34,14 +34,7 @@ keymap.set("n", "<leader><leader>m", "<cmd>Mason<cr>", { desc = "Open Mason" })
 keymap.set("n", "x", '"_x')
 
 -- Window Management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "[S]plit [V]ertical" }) -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "[S]plit [H]orizontal" }) -- split window vertically
 keymap.set("n", "<leader>q", "<C-w>q") -- close window
-
-keymap.set("n", "<M-,>", "<C-w>5<", { desc = "Shrink pane width by 5" })
-keymap.set("n", "<M-.>", "<C-w>5>", { desc = "Grow pane width by 5" })
-keymap.set("n", "<M-t>", "<C-W>+", { desc = "Grow pane height" })
-keymap.set("n", "<M-s>", "<C-W>-", { desc = "Shrink pane height" })
 
 keymap.set("n", "Q", "<nop>")
 
