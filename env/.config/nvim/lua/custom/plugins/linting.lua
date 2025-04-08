@@ -27,9 +27,6 @@ return {
 			end,
 		})
 
-		vim.keymap.set("n", "<leader>ll", function()
-			lint.try_lint()
-			print("lint success")
-		end, { desc = "Trigger linting for current file" })
+		vim.keymap.set("n", "<leader>ll", "<cmd>!eslint_d % --fix<CR>", { desc = "Run eslint_d on current file" })
 	end,
 }
