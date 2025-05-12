@@ -21,7 +21,7 @@ bindings = [
   { key = "Back", mods = "Command", chars = "\u0015"},
   { key = "Right", mods = "Alt", chars = "\u001BF" },
   { key = "Left",  mods = "Alt", chars = "\u001BB" },
-  { key = "Backspace", mods = "Alt", chars = "\u001B\u007F" },  
+  { key = "Back", mods = "Alt", chars = "\u001B\u007F" },  
 ]
 
 [general]
