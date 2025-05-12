@@ -27,6 +27,10 @@ return {
 			end,
 		})
 
-		vim.keymap.set("n", "<leader>ll", "<cmd>!eslint_d % --fix<CR>", { desc = "Run eslint_d on current file" })
+		vim.keymap.set("n", "<leader>ll", function()
+			local current_file = vim.fn.expand("%")
+			local escaped_file = vim.fn.shellescape(current_file)
+			vim.cmd("!eslint_d " .. escaped_file .. " --fix")
+		end, { desc = "Run eslint_d on current file" })
 	end,
 }

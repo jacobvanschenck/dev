@@ -36,6 +36,8 @@ return {
 					},
 				},
 				defaults = {
+					path_display = { "filename_first" },
+					dynamic_preview_title = true,
 					mappings = {
 						i = {
 							["<C-d>"] = actions.delete_buffer,
