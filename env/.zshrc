@@ -95,3 +95,19 @@ alias gb='git branch | fzf | xargs git checkout'
 alias c='clear'
 alias n='nvim .'
 alias lg='lazygit'
+
+# Function to kill node server on a specific port or report if none found
+kill_node_on_port() {
+  local port="$1"
+  local pid=$(lsof -i :"$port" | grep -Eo "node\s+([0-9]+)\s+" | grep -o "[0-9]\+")
+
+  if [ -n "$pid" ]; then
+    echo "Killing node process with PID: $pid on port $port"
+    kill -9 "$pid"
+  else
+    echo "Nothing running on port $port"
+  fi
+}
+
+# Alias to call the function with port 3232
+alias ks='kill_node_on_port 3232'
