@@ -46,6 +46,7 @@ export PATH=$PATH:$GOPATH/bin
 
 # ---- Scripts ----
 export PATH=$PATH:$HOME/.local/scripts
+export PATH=$PATH:$HOME/.local/bin
 
 # ---- Eza (better ls) -----
 alias ll="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --all --group-directories-first"
