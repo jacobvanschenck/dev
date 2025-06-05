@@ -11,6 +11,7 @@ return {
 			-- This is where all the LSP shenanigans will live
 
 			local lsp = require("lspconfig")
+			local configs = require("lspconfig.configs")
 			local keymap = vim.keymap
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -95,6 +96,27 @@ return {
 					diagnostics = { ignoredCodes = { 6133 } },
 				},
 			})
+
+			-- configs.tsgo = {
+			-- 	default_config = {
+			-- 		cmd = { "tsgo", "--lsp", "-stdio" },
+			-- 		filetypes = {
+			-- 			"javascript",
+			-- 			"javascriptreact",
+			-- 			"javascript.jsx",
+			-- 			"typescript",
+			-- 			"typescriptreact",
+			-- 			"typescript.tsx",
+			-- 		},
+			-- 		root_dir = lsp.util.root_pattern({ "tsconfig.json", "jsconfig.json", "package.json", ".git" }),
+			-- 	},
+			-- }
+			--
+			-- lsp.tsgo.setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- })
 
 			lsp["elixirls"].setup({
 				handlers = handlers,
@@ -205,16 +227,18 @@ return {
 				on_attach = on_attach,
 			})
 
-			-- lsp["eslint"].setup({
-			-- 	handlers = handlers,
-			-- 	capabilities = capabilities,
-			-- 	on_attach = function(client, bufnr)
-			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 			buffer = bufnr,
-			-- 			command = "EslintFixAll",
-			-- 		})
-			-- 	end,
-			-- })
+			lsp["eslint"].setup({
+				handlers = handlers,
+				capabilities = capabilities,
+				on_attach = function(_, bufnr)
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						callback = function()
+							vim.cmd("EslintFixAll")
+						end,
+					})
+				end,
+			})
 
 			-- configure lua server (with special settings)
 			lsp["lua_ls"].setup({
