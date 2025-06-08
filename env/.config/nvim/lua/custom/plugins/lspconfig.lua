@@ -65,6 +65,7 @@ return {
 				handlers = handlers,
 				capabilities = capabilities,
 				on_attach = on_attach,
+				filetypes = { "astro" },
 			})
 
 			-- configure html server
@@ -118,12 +119,12 @@ return {
 			-- 	on_attach = on_attach,
 			-- })
 
-			lsp["elixirls"].setup({
-				handlers = handlers,
-				capabilities = capabilities,
-				on_attach = on_attach,
-				cmd = { "/Users/jacobvanschenck/.local/share/nvim/mason/bin/elixir-ls" },
-			})
+			-- lsp["elixirls"].setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	cmd = { "/Users/jacobvanschenck/.local/share/nvim/mason/bin/elixir-ls" },
+			-- })
 
 			lsp["rust_analyzer"].setup({
 				handlers = handlers,
