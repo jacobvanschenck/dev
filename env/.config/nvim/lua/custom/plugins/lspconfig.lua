@@ -228,17 +228,29 @@ return {
 				on_attach = on_attach,
 			})
 
-			lsp["eslint"].setup({
+			-- lsp["eslint"].setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = function(_, bufnr)
+			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 			buffer = bufnr,
+			-- 			callback = function()
+			-- 				vim.cmd("EslintFixAll")
+			-- 			end,
+			-- 		})
+			-- 	end,
+			-- })
+
+			lsp["terraformls"].setup({
 				handlers = handlers,
 				capabilities = capabilities,
-				on_attach = function(_, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						callback = function()
-							vim.cmd("EslintFixAll")
-						end,
-					})
-				end,
+				on_attach = on_attach,
+			})
+
+			lsp["tflint"].setup({
+				handlers = handlers,
+				capabilities = capabilities,
+				on_attach = on_attach,
 			})
 
 			-- configure lua server (with special settings)

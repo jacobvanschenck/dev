@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
-		local util = require("conform.util")
 
 		conform.setup({
 			log_level = vim.log.levels.DEBUG,

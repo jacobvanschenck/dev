@@ -115,3 +115,6 @@ kill_node_on_port() {
 
 # Alias to call the function with port 3232
 alias ks='kill_node_on_port 3232'
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

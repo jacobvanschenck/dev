@@ -27,6 +27,7 @@ return {
 				"styled",
 				"tsx",
 				"typescript",
+				"terraform",
 				"vim",
 				"vimdoc",
 				"yaml",
