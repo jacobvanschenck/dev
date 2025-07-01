@@ -31,19 +31,17 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss",
-				"lua_ls",
 				"graphql",
 				"gopls",
 			},
+			automatic_enable = true,
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettierd", -- prettier formatter
 				"stylua", -- lua formatter
-				"eslint_d", -- js linter
 				"rustywind", -- Tailwind class sorter
 				"gopls",
 			},
