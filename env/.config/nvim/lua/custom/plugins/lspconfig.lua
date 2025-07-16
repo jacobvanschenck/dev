@@ -15,6 +15,13 @@ return {
 			local keymap = vim.keymap
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+			local signs = {
+				Error = "",
+				Warn = "",
+				Hint = "",
+				Info = "",
+			}
+
 			-- Add borders to diagnostic window
 			vim.diagnostic.config({
 				virtual_text = false,
@@ -22,6 +29,15 @@ return {
 					border = "rounded",
 					focusable = true,
 				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = signs.Error,
+						[vim.diagnostic.severity.WARN] = signs.Warn,
+						[vim.diagnostic.severity.HINT] = signs.Hint,
+						[vim.diagnostic.severity.INFO] = signs.Info,
+					},
+				},
+				update_in_insert = false, -- Recommended: Don't update diagnostics in insert mode
 			})
 
 			-- Add borders to hover and signature help
@@ -50,16 +66,6 @@ return {
 			end
 
 			local capabilities = cmp_nvim_lsp.default_capabilities()
-			local signs = {
-				Error = "",
-				Warn = "",
-				Hint = "",
-				Info = "",
-			}
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-			end
 
 			lsp.astro.setup({
 				handlers = handlers,
