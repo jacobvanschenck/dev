@@ -12,6 +12,11 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Source environment variables from .env file if it exists
+if [[ -f "$HOME/.env" ]]; then
+  source "$HOME/.env"
+fi
+
 # history setup
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
