@@ -6,17 +6,12 @@ return {
 
 		vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon: add file" })
 		vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon: open menu" })
-		vim.keymap.set("n", "<C-j>", function()
-			ui.nav_file(1)
-		end, { desc = "Harpoon: nav 1" })
-		vim.keymap.set("n", "<C-k>", function()
-			ui.nav_file(2)
-		end, { desc = "Harpoon: nav 2" })
-		vim.keymap.set("n", "<C-l>", function()
-			ui.nav_file(3)
-		end, { desc = "Harpoon: nav 3" })
-		vim.keymap.set("n", "<C-;>", function()
-			ui.nav_file(4)
-		end, { desc = "Harpoon: nav 4" })
+
+		-- Set <space>1..<space>5 be my shortcuts to moving to the files
+		for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+			vim.keymap.set("n", string.format("<space>%d", idx), function()
+				ui.nav_file(idx)
+			end, { desc = string.format("Harpoon Nav %d", idx) })
+		end
 	end,
 }

@@ -14,6 +14,15 @@ keymap.set("n", "<CR>", function()
 	end
 end)
 
+-- Basic movement keybinds, these make navigating splits easy for me
+keymap.set("n", "<c-j>", "<c-w><c-j>")
+keymap.set("n", "<c-k>", "<c-w><c-k>")
+keymap.set("n", "<c-l>", "<c-w><c-l>")
+keymap.set("n", "<c-h>", "<c-w><c-h>")
+
+keymap.set("n", "<leader>sv", "<c-w>v") -- split vertically
+keymap.set("n", "<leader>sh", "<c-w>s") -- split vertically
+
 -- move lines of text up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
