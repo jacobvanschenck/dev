@@ -29,6 +29,9 @@ return {
 					border = "rounded",
 					focusable = true,
 				},
+				jump = {
+					float = true,
+				},
 				signs = {
 					text = {
 						[vim.diagnostic.severity.ERROR] = signs.Error,
@@ -50,18 +53,13 @@ return {
 				-- keybind options
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
-				-- if client.name == "tsserver" then
-				-- 	local ns = vim.lsp.diagnostic.get_namespace(client.id)
-				-- 	vim.diagnostic.disable(nil, ns)
-				-- end
-
 				-- set keybinds
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
 				keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+				keymap.set("n", "K", function()
+					vim.lsp.buf.hover({ border = "rounded" })
+				end, opts) -- show documentation for what is under cursor
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 			end
 
@@ -95,7 +93,7 @@ return {
 			-- })
 
 			-- configure typescript server with plugin
-			lsp["ts_ls"].setup({
+			lsp.ts_ls.setup({
 				handlers = handlers,
 				capabilities = capabilities,
 				on_attach = on_attach,
@@ -233,19 +231,6 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 			})
-
-			-- lsp["eslint"].setup({
-			-- 	handlers = handlers,
-			-- 	capabilities = capabilities,
-			-- 	on_attach = function(_, bufnr)
-			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 			buffer = bufnr,
-			-- 			callback = function()
-			-- 				vim.cmd("EslintFixAll")
-			-- 			end,
-			-- 		})
-			-- 	end,
-			-- })
 
 			lsp["terraformls"].setup({
 				handlers = handlers,

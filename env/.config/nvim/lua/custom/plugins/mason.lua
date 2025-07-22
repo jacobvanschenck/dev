@@ -33,8 +33,17 @@ return {
 				"tailwindcss",
 				"graphql",
 				"gopls",
+				"ts_ls",
+				"eslint",
+				"lua_ls",
 			},
-			automatic_enable = true,
+			automatic_enable = {
+				exclude = {
+					"ts_ls",
+					"eslint",
+					"lua_ls",
+				},
+			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
 		})
