@@ -1,0 +1,14 @@
+#!/bin/bash
+
+WINDOW_NAME="opencode"
+
+if tmux list-windows -F '#{window_name}' | grep -q "^$WINDOW_NAME$"; then
+  tmux select-window -t "$WINDOW_NAME" || error_exit "Failed to select existing window '$WINDOW_NAME'."
+else
+  tmux neww -dn "$WINDOW_NAME"
+  tmux send-keys -t "$WINDOW_NAME" "opencode" C-m
+  tmux select-window -t "$WINDOW_NAME"
+fi
+
+exit 0
+
