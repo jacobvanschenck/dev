@@ -169,10 +169,11 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				cmd = { "gopls" },
-				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				filetypes = { "go", "gomod", "gowork", "template" },
 				root_dir = lsp.util.root_pattern("go.work", "go.mod", ".git"),
 				settings = {
 					gopls = {
+						templateExtensions = { "tmpl" },
 						completeUnimported = true,
 						analyses = {
 							unusedparams = true,
@@ -200,6 +201,14 @@ return {
 				handlers = handlers,
 				capabilities = capabilities,
 				on_attach = on_attach,
+				root_dir = lsp.util.root_pattern(
+					"tailwind.config.js",
+					"tailwind.config.ts",
+					"tailwind.config.cjs",
+					"package.json",
+					".git",
+					"go.mod" -- Important for your Go project
+				),
 			})
 
 			lsp["elmls"].setup({

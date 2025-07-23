@@ -22,6 +22,8 @@ return {
 				lua = { "stylua" },
 				elm = { "elm-format" },
 				go = { "gofumpt", "goimports-reviser", "golines" },
+				-- template = { "gofumpt", "templ", "injected" },
+				template = { "prettier", "rustywind" },
 				sql = { "sql_formatter" },
 			},
 			format_on_save = function()
