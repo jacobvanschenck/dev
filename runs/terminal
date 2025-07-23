@@ -5,7 +5,6 @@ brew install fzf
 brew install ripgrep
 brew install tree
 
-brew install powerlevel10k
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 brew install --cask font-fira-code-nerd-font
@@ -14,3 +13,4 @@ brew install jesseduffield/lazygit/lazygit
 
 brew install docker
 
+brew install starship

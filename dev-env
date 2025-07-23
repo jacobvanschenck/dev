@@ -58,3 +58,4 @@ copy_file .ready-tmux $HOME
 copy_file ./env/.zshrc $HOME
 copy_file ./env/.zprofile $HOME
 copy_file ./env/.zshenv $HOME
+copy_file ./env/.config/starship.toml $HOME/.config
