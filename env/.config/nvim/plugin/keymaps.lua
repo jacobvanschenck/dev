@@ -4,15 +4,15 @@ local keymap = vim.keymap
 keymap.set("i", "<C-c>", "<Esc>")
 
 -- clear search highlights
--- keymap.set("n", "<Esc>", ":nohl<CR>")
-keymap.set("n", "<CR>", function()
-	if vim.opt.hlsearch:get() then
-		vim.cmd.nohl()
-		return ""
-	else
-		return "<CR>"
-	end
-end)
+keymap.set("n", "<Esc>", ":nohl<CR>")
+-- keymap.set("n", "<CR>", function()
+-- 	if vim.opt.hlsearch:get() then
+-- 		vim.cmd.nohl()
+-- 		return ""
+-- 	else
+-- 		return "<CR>"
+-- 	end
+-- end)
 
 -- Basic movement keybinds, these make navigating splits easy for me
 keymap.set("n", "<c-j>", "<c-w><c-j>")
