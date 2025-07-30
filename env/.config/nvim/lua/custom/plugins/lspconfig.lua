@@ -11,7 +11,6 @@ return {
 			-- This is where all the LSP shenanigans will live
 
 			local lsp = require("lspconfig")
-			local configs = require("lspconfig.configs")
 			local keymap = vim.keymap
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -49,18 +48,18 @@ return {
 				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 			}
 
-			local on_attach = function(client, bufnr)
+			local on_attach = function(_, bufnr)
 				-- keybind options
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				-- set keybinds
-				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
-				keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+				-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
+				-- keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+				-- keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 				keymap.set("n", "K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
 				end, opts) -- show documentation for what is under cursor
-				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+				-- keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 			end
 
 			local capabilities = cmp_nvim_lsp.default_capabilities()
