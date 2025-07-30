@@ -19,6 +19,7 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
+
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
@@ -112,6 +113,9 @@ alias ks='kill_node_on_port 3232'
 
 # ---- Starship (shell prompt) ----
 eval "$(starship init zsh)"
+
+bindkey "\ef" forward-word
+bindkey "\eb" backward-word
 
 # ---- Terraform ----
 autoload -U +X bashcompinit && bashcompinit

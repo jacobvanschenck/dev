@@ -18,9 +18,6 @@ size = 16
 bindings = [
   { key = "NumpadEnter", chars = "\r" },
   { key = "Back", mods = "Command", chars = "\u0015"},
-  { key = "Right", mods = "Alt", chars = "\u001BF" },
-  { key = "Left",  mods = "Alt", chars = "\u001BB" },
-  { key = "Back", mods = "Alt", chars = "\u001B\u007F" },  
 ]
 
 [general]
