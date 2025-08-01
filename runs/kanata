@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Keymapping
+brew install kanata
