@@ -22,7 +22,6 @@ return {
 				lua = { "stylua" },
 				elm = { "elm-format" },
 				go = { "gofumpt", "goimports-reviser", "golines" },
-				-- template = { "gofumpt", "templ", "injected" },
 				template = { "prettier", "rustywind" },
 				sql = { "sql_formatter" },
 			},
@@ -38,31 +37,11 @@ return {
 			end,
 		})
 
-		-- vim.api.nvim_create_user_command("FormatDisable", function()
-		-- 	vim.g.disable_autoformat = true
-		-- end, {
-		-- 	desc = "Disable autoformat-on-save",
-		-- 	bang = true,
-		-- })
-		-- vim.api.nvim_create_user_command("FormatEnable", function()
-		-- 	vim.g.disable_autoformat = false
-		-- end, {
-		-- 	desc = "Re-enable autoformat-on-save",
-		-- })
+		vim.keymap.set("n", "<leader>f", function()
+			local current_file = vim.fn.expand("%")
+			local escaped_file = vim.fn.shellescape(current_file)
 
-		-- conform.formatters.prettierd = {
-		-- 	require_cwd = true,
-		-- 	cwd = util.root_file({ "prettier.config.cjs", ".prettierrc", ".prettierrc.js", ".prettierrc.json" }),
-		-- }
-
-		-- vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-		-- 	conform.format({
-		-- 		lsp_fallback = true,
-		-- 		async = true,
-		-- 		timeout_ms = 1000,
-		-- 		formatters = { "prettier" },
-		-- 	})
-		-- 	print("success")
-		-- end, { desc = "[F]ormat [F]ile or range (in visual mode)" })
+			vim.cmd("!eslint_d " .. escaped_file .. " --fix")
+		end, { desc = "Run eslint_d on current file" })
 	end,
 }
