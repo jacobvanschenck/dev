@@ -13,10 +13,10 @@ return {
 		},
 		version = false,
 		keys = {
-			{ "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "LSP Definitions" },
-			{ "gr", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
-			{ "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "LSP Implementations" },
-			{ "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "LSP Type Definitions" },
+			{ "<leader>gd", "<cmd>Telescope lsp_definitions<cr>", desc = "LSP Definitions" },
+			{ "<leader>gr", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
+			{ "<leader>gi", "<cmd>Telescope lsp_implementations<cr>", desc = "LSP Implementations" },
+			{ "<leader>gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "LSP Type Definitions" },
 		},
 		config = function()
 			local telescope_setup, telescope = pcall(require, "telescope")
