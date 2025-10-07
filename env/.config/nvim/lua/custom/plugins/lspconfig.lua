@@ -53,13 +53,10 @@ return {
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				-- set keybinds
-				-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
-				-- keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-				-- keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+				keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				keymap.set("n", "K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
 				end, opts) -- show documentation for what is under cursor
-				-- keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 			end
 
 			local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -79,17 +76,17 @@ return {
 			})
 
 			-- configure biome
-			-- lsp["biome"].setup({
-			-- 	handlers = handlers,
-			-- 	capabilities = capabilities,
-			-- 	on_attach = on_attach,
-			-- 	root_dir = function(fname)
-			-- 		return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
-			-- 			or lsp.util.find_package_json_ancestor(fname)
-			-- 			or lsp.util.find_node_modules_ancestor(fname)
-			-- 			or lsp.util.find_git_ancestor(fname)
-			-- 	end,
-			-- })
+			lsp["biome"].setup({
+				handlers = handlers,
+				capabilities = capabilities,
+				on_attach = on_attach,
+				root_dir = function(fname)
+					return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
+						or lsp.util.find_package_json_ancestor(fname)
+						or lsp.util.find_node_modules_ancestor(fname)
+						or lsp.util.find_git_ancestor(fname)
+				end,
+			})
 
 			-- configure typescript server with plugin
 			lsp.ts_ls.setup({
@@ -100,34 +97,6 @@ return {
 					diagnostics = { ignoredCodes = { 6133 } },
 				},
 			})
-
-			-- configs.tsgo = {
-			-- 	default_config = {
-			-- 		cmd = { "tsgo", "--lsp", "-stdio" },
-			-- 		filetypes = {
-			-- 			"javascript",
-			-- 			"javascriptreact",
-			-- 			"javascript.jsx",
-			-- 			"typescript",
-			-- 			"typescriptreact",
-			-- 			"typescript.tsx",
-			-- 		},
-			-- 		root_dir = lsp.util.root_pattern({ "tsconfig.json", "jsconfig.json", "package.json", ".git" }),
-			-- 	},
-			-- }
-			--
-			-- lsp.tsgo.setup({
-			-- 	handlers = handlers,
-			-- 	capabilities = capabilities,
-			-- 	on_attach = on_attach,
-			-- })
-
-			-- lsp["elixirls"].setup({
-			-- 	handlers = handlers,
-			-- 	capabilities = capabilities,
-			-- 	on_attach = on_attach,
-			-- 	cmd = { "/Users/jacobvanschenck/.local/share/nvim/mason/bin/elixir-ls" },
-			-- })
 
 			lsp["rust_analyzer"].setup({
 				handlers = handlers,
