@@ -76,17 +76,17 @@ return {
 			})
 
 			-- configure biome
-			lsp["biome"].setup({
-				handlers = handlers,
-				capabilities = capabilities,
-				on_attach = on_attach,
-				root_dir = function(fname)
-					return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
-						or lsp.util.find_package_json_ancestor(fname)
-						or lsp.util.find_node_modules_ancestor(fname)
-						or lsp.util.find_git_ancestor(fname)
-				end,
-			})
+			-- lsp["biome"].setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	root_dir = function(fname)
+			-- 		return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
+			-- 			or lsp.util.find_package_json_ancestor(fname)
+			-- 			or lsp.util.find_node_modules_ancestor(fname)
+			-- 			or lsp.util.find_git_ancestor(fname)
+			-- 	end,
+			-- })
 
 			-- configure typescript server with plugin
 			lsp.ts_ls.setup({
