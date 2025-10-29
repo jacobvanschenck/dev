@@ -7,10 +7,14 @@ return {
 		conform.setup({
 			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier", "rustywind" },
-				typescriptreact = { "prettier", "rustywind" },
+				javascript = { "biome" },
+				typescript = { "biome" },
+				javascriptreact = { "biome", "rustywind" },
+				typescriptreact = { "biome", "rustywind" },
+				-- javascript = { "prettier" },
+				-- typescript = { "prettier" },
+				-- javascriptreact = { "prettier", "rustywind" },
+				-- typescriptreact = { "prettier", "rustywind" },
 				json = { "prettier" },
 				astro = { "prettier", "rustywind" },
 				css = { "prettier", "rustywind" },
