@@ -59,6 +59,7 @@ return {
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				-- set keybinds
+				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 				keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				keymap.set("n", "K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
