@@ -1,3 +1,9 @@
+local ok, features = pcall(require, "local_features")
+local default_features = {
+	enable_biome_lsp = false,
+}
+local config = ok and features or default_features
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -7,14 +13,10 @@ return {
 		conform.setup({
 			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
-				javascript = { "biome" },
-				typescript = { "biome" },
-				javascriptreact = { "biome", "rustywind" },
-				typescriptreact = { "biome", "rustywind" },
-				-- javascript = { "prettier" },
-				-- typescript = { "prettier" },
-				-- javascriptreact = { "prettier", "rustywind" },
-				-- typescriptreact = { "prettier", "rustywind" },
+				javascript = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
+				typescript = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
+				javascriptreact = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
+				typescriptreact = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
 				json = { "prettier" },
 				astro = { "prettier", "rustywind" },
 				css = { "prettier", "rustywind" },
@@ -45,7 +47,11 @@ return {
 			local current_file = vim.fn.expand("%")
 			local escaped_file = vim.fn.shellescape(current_file)
 
-			vim.cmd("!eslint_d " .. escaped_file .. " --fix")
+			if config.enable_biome_lsp then
+				vim.cmd("BiomeFixAll")
+			else
+				vim.cmd("!eslint_d " .. escaped_file .. " --fix")
+			end
 		end, { desc = "Run eslint_d on current file" })
 	end,
 }
