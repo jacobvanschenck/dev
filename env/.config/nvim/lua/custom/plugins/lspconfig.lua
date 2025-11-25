@@ -9,13 +9,6 @@ return {
 		},
 		config = function()
 			-- This is where all the LSP shenanigans will live
-
-			local ok, features = pcall(require, "local_features")
-			local default_features = {
-				enable_biome_lsp = false,
-			}
-			local config = ok and features or default_features
-
 			local lsp = require("lspconfig")
 			local keymap = vim.keymap
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -83,48 +76,39 @@ return {
 			})
 
 			-- configure biome
-			-- configure biome
-			if config.enable_biome_lsp then
-				print("Biome LSP is enabled")
-				lsp["biome"].setup({
-					handlers = handlers,
-					capabilities = capabilities,
-					-- Pass a new function that chains your existing on_attach logic
-					-- with the new autocommand for Biome fixes.
-					on_attach = function(client, bufnr)
-						-- 1. Call your existing on_attach function
-						if on_attach then
-							on_attach(client, bufnr)
-						end
+			lsp["biome"].setup({
+				handlers = handlers,
+				capabilities = capabilities,
+				-- Pass a new function that chains your existing on_attach logic
+				-- with the new autocommand for Biome fixes.
+				on_attach = function(client, bufnr)
+					if on_attach then
+						on_attach(client, bufnr)
+					end
 
-						-- 2. Add the Autocommand for Biome Fix-on-Save
-						if client.name == "biome" then
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								buffer = bufnr, -- Apply only to the current buffer
-								desc = "Auto fix Biome diagnostics on save",
-								callback = function()
-									-- Execute the Biome 'source.fixAll.biome' code action
-									vim.lsp.buf.code_action({
-										context = {
-											only = { "source.fixAll.biome" },
-										},
-										apply = true, -- Apply the fix immediately
-										bufnr = bufnr,
-									})
-								end,
-							})
-						end
-					end,
-					root_dir = function(fname)
-						return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
-							or lsp.util.find_package_json_ancestor(fname)
-							or lsp.util.find_node_modules_ancestor(fname)
-							or lsp.util.find_git_ancestor(fname)
-					end,
-				})
-			else
-				print("Biome LSP is disabled")
-			end
+					if client.name == "biome" then
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = bufnr, -- Apply only to the current buffer
+							desc = "Auto fix Biome diagnostics on save",
+							callback = function()
+								vim.lsp.buf.code_action({
+									context = {
+										only = { "source.fixAll.biome" },
+									},
+									apply = true, -- Apply the fix immediately
+									bufnr = bufnr,
+								})
+							end,
+						})
+					end
+				end,
+				root_dir = function(fname)
+					return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
+						or lsp.util.find_package_json_ancestor(fname)
+						or lsp.util.find_node_modules_ancestor(fname)
+						or lsp.util.find_git_ancestor(fname)
+				end,
+			})
 
 			-- configure typescript server with plugin
 			lsp.ts_ls.setup({
@@ -215,11 +199,11 @@ return {
 			})
 
 			-- configure css server
-			lsp["jsonls"].setup({
-				handlers = handlers,
-				capabilities = capabilities,
-				on_attach = on_attach,
-			})
+			-- lsp["jsonls"].setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- })
 
 			-- configure tailwindcss server
 			lsp["tailwindcss"].setup({

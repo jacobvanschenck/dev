@@ -95,6 +95,13 @@ alias c='clear'
 alias n='nvim .'
 alias lg='lazygit'
 
+# ---- Overflow ----
+alias yd_server='yarn dev --filter=@getoverflow/server --ui=tui'
+alias yd_dash='yarn dev --filter=@getoverflow/server --filter=@getoverflow/nonprofit-dashboard --ui=tui'
+alias yd_flow='yarn dev --filter=@getoverflow/server --filter=@getoverflow/donor-flows --ui=tui'
+alias yd_profile='yarn dev --filter=@getoverflow/server --filter=@getoverflow/donor-profile --ui=tui'
+alias yd_mc='yarn dev --filter=@getoverflow/server --filter=@getoverflow/mission-control --ui=tui'
+
 # Function to kill node server on a specific port or report if none found
 kill_node_on_port() {
   local port="$1"

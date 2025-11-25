@@ -1,9 +1,3 @@
-local ok, features = pcall(require, "local_features")
-local default_features = {
-	enable_biome_lsp = false,
-}
-local config = ok and features or default_features
-
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -13,22 +7,22 @@ return {
 		conform.setup({
 			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
-				javascript = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
-				typescript = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
-				javascriptreact = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
-				typescriptreact = config.enable_biome_lsp and { "biome", "rustywind" } or { "prettier" },
-				json = { "prettier" },
-				astro = { "prettier", "rustywind" },
-				css = { "prettier", "rustywind" },
-				html = { "prettier", "rustywind" },
+				javascript = { "biome", "rustywind" },
+				typescript = { "biome", "rustywind" },
+				javascriptreact = { "biome", "rustywind" },
+				typescriptreact = { "biome", "rustywind" },
+				json = { "biome" },
+				astro = { "biome", "rustywind" },
+				css = { "biome", "rustywind" },
+				html = { "biome", "rustywind" },
 				yaml = { "yamlfix" },
-				markdown = { "prettier" },
-				solidity = { "prettier" },
-				graphql = { "prettier" },
+				markdown = { "biome" },
+				solidity = { "biome" },
+				graphql = { "biome" },
 				lua = { "stylua" },
 				elm = { "elm-format" },
 				go = { "gofumpt", "goimports-reviser", "golines" },
-				template = { "prettier", "rustywind" },
+				template = { "biome", "rustywind" },
 				sql = { "sql_formatter" },
 			},
 			format_on_save = function()
@@ -44,14 +38,7 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>f", function()
-			local current_file = vim.fn.expand("%")
-			local escaped_file = vim.fn.shellescape(current_file)
-
-			if config.enable_biome_lsp then
-				vim.cmd("BiomeFixAll")
-			else
-				vim.cmd("!eslint_d " .. escaped_file .. " --fix")
-			end
-		end, { desc = "Run eslint_d on current file" })
+			vim.cmd("BiomeFixAll")
+		end, { desc = "Run biome on current file" })
 	end,
 }
