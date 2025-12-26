@@ -25,6 +25,13 @@ return {
 				template = { "biome", "rustywind" },
 				sql = { "sql_formatter" },
 			},
+			formatters = {
+				biome = {
+					-- "check" runs formatting AND unsafe fixes (like sorting imports)
+					-- Use "check --apply" for safe fixes only, or "check --apply-unsafe" for everything
+					args = { "check", "--write", "--stdin-file-path", "$FILENAME" },
+				},
+			},
 			format_on_save = function()
 				if vim.g.disable_autoformat then
 					return
@@ -36,9 +43,5 @@ return {
 				}
 			end,
 		})
-
-		vim.keymap.set("n", "<leader>f", function()
-			vim.cmd("BiomeFixAll")
-		end, { desc = "Run biome on current file" })
 	end,
 }

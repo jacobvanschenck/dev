@@ -102,6 +102,8 @@ alias yd_flow='yarn dev --filter=@getoverflow/server --filter=@getoverflow/donor
 alias yd_profile='yarn dev --filter=@getoverflow/server --filter=@getoverflow/donor-profile --ui=tui'
 alias yd_mc='yarn dev --filter=@getoverflow/server --filter=@getoverflow/mission-control --ui=tui'
 
+alias yt_server='export NODE_OPTIONS="--max-old-space-size=4096" && yarn types --filter=@getoverflow/server --ui=tui'
+
 # Function to kill node server on a specific port or report if none found
 kill_node_on_port() {
   local port="$1"

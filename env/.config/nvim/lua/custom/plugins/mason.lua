@@ -27,6 +27,7 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
+				"biome",
 				"astro",
 				"html",
 				"cssls",
@@ -44,8 +45,7 @@ return {
 					"lua_ls",
 				},
 			},
-			-- auto-install configured servers (with lspconfig)
-			automatic_installation = true, -- not the same as ensure_installed
+			automatic_installation = false,
 		})
 
 		mason_tool_installer.setup({

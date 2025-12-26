@@ -3,7 +3,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		cmd = "LspInfo",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost" },
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 		},
@@ -79,34 +79,13 @@ return {
 			lsp["biome"].setup({
 				handlers = handlers,
 				capabilities = capabilities,
-				-- Pass a new function that chains your existing on_attach logic
-				-- with the new autocommand for Biome fixes.
-				on_attach = function(client, bufnr)
-					if on_attach then
-						on_attach(client, bufnr)
-					end
-
-					if client.name == "biome" then
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = bufnr, -- Apply only to the current buffer
-							desc = "Auto fix Biome diagnostics on save",
-							callback = function()
-								vim.lsp.buf.code_action({
-									context = {
-										only = { "source.fixAll.biome" },
-									},
-									apply = true, -- Apply the fix immediately
-									bufnr = bufnr,
-								})
-							end,
-						})
-					end
-				end,
+				on_attach = on_attach,
+				single_file_support = false,
 				root_dir = function(fname)
-					return lsp.util.root_pattern("biome.json", "biome.jsonc")(fname)
-						or lsp.util.find_package_json_ancestor(fname)
-						or lsp.util.find_node_modules_ancestor(fname)
-						or lsp.util.find_git_ancestor(fname)
+					local util = require("lspconfig.util")
+					-- Prioritize .git to lock to the monorepo root
+					-- If no .git is found, look for biome.json
+					return util.root_pattern(".git")(fname) or util.root_pattern("biome.json", "biome.jsonc")(fname)
 				end,
 			})
 
@@ -114,7 +93,13 @@ return {
 			lsp.ts_ls.setup({
 				handlers = handlers,
 				capabilities = capabilities,
-				on_attach = on_attach,
+				on_attach = function(client, bufnr)
+					if on_attach then
+						on_attach(client, bufnr)
+					end
+					-- Disable formatting for typescript to avoid conflicts with biome
+					client.server_capabilities.documentFormattingProvider = false
+				end,
 				settings = {
 					diagnostics = { ignoredCodes = { 6133 } },
 				},
