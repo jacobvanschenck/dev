@@ -89,40 +89,40 @@ return {
 				end,
 			})
 
-			-- configure typescript server with plugin
-			lsp.ts_ls.setup({
-				handlers = handlers,
-				capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					if on_attach then
-						on_attach(client, bufnr)
-					end
-					-- Disable formatting for typescript to avoid conflicts with biome
-					client.server_capabilities.documentFormattingProvider = false
-				end,
-				settings = {
-					diagnostics = { ignoredCodes = { 6133 } },
-				},
-			})
-
-			-- vim.lsp.config("tsgo", {
-			-- 	cmd = { "tsgo", "--lsp", "--stdio" },
-			-- 	filetypes = {
-			-- 		"javascript",
-			-- 		"javascriptreact",
-			-- 		"javascript.jsx",
-			-- 		"typescript",
-			-- 		"typescriptreact",
-			-- 		"typescript.tsx",
-			-- 	},
-			-- 	root_markers = {
-			-- 		"tsconfig.json",
-			-- 		"jsconfig.json",
-			-- 		"package.json",
-			-- 		".git",
-			-- 		"tsconfig.base.json",
+			-- -- configure typescript server with plugin
+			-- lsp.ts_ls.setup({
+			-- 	handlers = handlers,
+			-- 	capabilities = capabilities,
+			-- 	on_attach = function(client, bufnr)
+			-- 		if on_attach then
+			-- 			on_attach(client, bufnr)
+			-- 		end
+			-- 		-- Disable formatting for typescript to avoid conflicts with biome
+			-- 		client.server_capabilities.documentFormattingProvider = false
+			-- 	end,
+			-- 	settings = {
+			-- 		diagnostics = { ignoredCodes = { 6133 } },
 			-- 	},
 			-- })
+			--
+			vim.lsp.config("tsgo", {
+				cmd = { "tsgo", "--lsp", "--stdio" },
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				root_markers = {
+					"tsconfig.json",
+					"jsconfig.json",
+					"package.json",
+					".git",
+					"tsconfig.base.json",
+				},
+			})
 
 			lsp["rust_analyzer"].setup({
 				handlers = handlers,
