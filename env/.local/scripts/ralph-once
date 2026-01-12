@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e  # Exit on error
+
+opencode run \
+"@PRD.json @progress.txt \
+1. Read the PRD and progress file. \
+2. Find the next incomplete task and implement it. \
+3. Run typecheck and tests. \
+4. Commit your changes. \
+5. Update prd.json: \`passes: true\` \
+6. Update progress.txt with what you did. \
+ONLY DO ONE TASK AT A TIME. \
+\n## Progress Format \
+APPEND to progress.txt: \
+## [Date] - [Story ID] \
+- What was implemented \
+- Files changed \
+- **Learnings:** \
+  - Patterns discovered \
+  - Gotchas encountered" \
+-m opencode/claude-sonnet-4-5
