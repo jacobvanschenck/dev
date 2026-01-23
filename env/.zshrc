@@ -92,8 +92,9 @@ alias gb='git branch | fzf | xargs git checkout'
 
 # ---- More Aliases ----
 alias c='clear'
-alias n='nvim .'
+alias v='nvim .'
 alias lg='lazygit'
+alias k='kubectl'
 
 # ---- Overflow ----
 alias yd_server='yarn dev --filter=@getoverflow/server --ui=tui'
