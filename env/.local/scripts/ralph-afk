@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <iterations>"
+  exit 1
+fi
+
+for ((i=1; i<=$1; i++)); do
+  echo -e "\n============================="
+  echo "    Starting Iteration $i    "
+  echo -e "=============================\n"
+
+  PROMPT="@PRD.json @progress.txt 
+  1. Read the PRD and progress file. 
+  2. Find the next incomplete task and implement it. 
+  3. Run tests. 
+  4. Commit your changes. 
+  5. Update prd.json: 'passes: true' 
+  6. Update progress.txt with what you did. 
+  ONLY DO ONE TASK AT A TIME. 
+  If, while implementing the feature, you notice that all work 
+  is complete, output <promise>COMPLETE</promise>. 
+
+  ## Progress Format 
+  APPEND to progress.txt: 
+  ## [Date] - [Story ID] 
+  - What was implemented 
+  - Files changed 
+  - **Learnings:** - Patterns discovered 
+  - Gotchas encountered"
+
+  result=$(opencode run "$PROMPT" -m github-copilot/gpt-5.2-codex)
+  echo "$result"
+
+  # Check for completion signal
+  if [[ "$result" == *"<promise>COMPLETE</promise>"* ]]; then
+    echo "PRD complete, exiting."
+    exit 0
+  fi
+done
