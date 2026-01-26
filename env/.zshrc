@@ -27,7 +27,7 @@ alias ..="cd .."
 alias mkcd='function _mkcd(){ mkdir -p "$1" && cd "$1" }; _mkcd'
 
 # ---- ssh ----
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
 # ---- Nvim ----
 export EDITOR=nvim
