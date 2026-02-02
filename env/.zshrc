@@ -1,6 +1,8 @@
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+bindkey -e
+
 # Source environment variables from .env file if it exists
 if [[ -f "$HOME/.env" ]]; then
   source "$HOME/.env"
