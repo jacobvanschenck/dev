@@ -26,9 +26,6 @@ bindkey '^[[B' history-search-forward
 alias ..="cd .."
 alias mkcd='function _mkcd(){ mkdir -p "$1" && cd "$1" }; _mkcd'
 
-# ---- ssh ----
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-
 # ---- Nvim ----
 export EDITOR=nvim
 
