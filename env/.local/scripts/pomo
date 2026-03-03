@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Check if dependencies are installed
+for cmd in gum timer terminal-notifier; do
+  if ! command -v $cmd &> /dev/null; then
+    echo "Error: '$cmd' is not installed. Please install it to continue."
+    exit 1
+  fi
+done
+
+# Clear screen for a clean start
+clear
+
+# --- Header ---
+gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "1 2" --padding "1 2" \
+	"🍌 BANANA POMODORO 🍌"
+
+# --- Selection ---
+CHOICE=$(gum choose "25/5 (Classic)" "50/10 (Deep Work)" "Exit")
+
+case $CHOICE in
+  "25/5 (Classic)")
+    WORK="25m"
+    REST="5m"
+    ;;
+  "50/10 (Deep Work)")
+    WORK="50m"
+    REST="10m"
+    ;;
+  "Exit")
+    echo "See ya later!"
+    exit 0
+    ;;
+esac
+
+# --- Work Phase ---
+gum style --foreground 57 --bold "▶️  Focus Phase: $WORK"
+timer "$WORK" && terminal-notifier \
+    -message "Pomodoro" \
+    -title "Work Timer is up! Take a Break 😊" \
+    -appIcon '~/Documents/banana.png' \
+    -sound Crystal
+
+# --- Break Phase ---
+gum style --foreground 212 --bold "☕️ Break Phase: $REST"
+timer "$REST" && terminal-notifier \
+    -message "Pomodoro" \
+    -title "Break is over! Get back to work 😬" \
+    -appIcon '~/Documents/banana.png' \
+    -sound Crystal
+
+gum style --foreground 82 --bold "✅ Session Complete!"
