@@ -15,9 +15,9 @@ local function sync_system_theme()
 	handle:close()
 
 	if result == "Dark" then
-		vim.cmd.colorscheme("rose-pine")
+		vim.o.background = "dark"
 	else
-		vim.cmd.colorscheme("rose-pine-dawn")
+		vim.o.background = "light"
 	end
 end
 
