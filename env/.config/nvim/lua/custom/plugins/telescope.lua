@@ -17,6 +17,7 @@ return {
 			{ "<leader>gr", "<cmd>Telescope lsp_references<cr>", desc = "LSP References" },
 			{ "<leader>gi", "<cmd>Telescope lsp_implementations<cr>", desc = "LSP Implementations" },
 			{ "<leader>gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "LSP Type Definitions" },
+			{ "<leader>ct", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
 		},
 		config = function()
 			local telescope_setup, telescope = pcall(require, "telescope")
