@@ -1,0 +1,4 @@
+#!/bin/bash
+
+brew install caarlos0/tap/timer
+brew install terminal-notifier
