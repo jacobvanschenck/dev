@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 tmux new-window -dn cmd
+tmux new-window -dn opencode
+tmux send-keys -t "opencode" "opencode" C-m
 tmux rename-window nvim
 nvim .
 clear
