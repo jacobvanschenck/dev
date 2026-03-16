@@ -43,6 +43,7 @@ return {
 					"ts_ls",
 					"eslint",
 					"lua_ls",
+					"rust_analyzer",
 				},
 			},
 			automatic_installation = false,
