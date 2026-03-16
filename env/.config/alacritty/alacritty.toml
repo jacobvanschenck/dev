@@ -22,5 +22,6 @@ bindings = [
 
 [general]
 import = [
+  # "~/.config/alacritty/themes/rose-pine-dawn.toml"
   "~/.config/alacritty/themes/rose-pine.toml"
 ]
