@@ -1,0 +1,5 @@
+require("jacob.core.keymaps")
+require("jacob.core.auto_commands")
+require("jacob.core.filetypes")
+require("jacob.core.options")
+require("jacob.core.test")
