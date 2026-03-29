@@ -43,7 +43,20 @@ return {
 						i = {
 							["<C-d>"] = actions.delete_buffer,
 							["<C-y>"] = actions.select_default,
+							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
+					},
+				},
+				pickers = {
+					live_grep = {
+						additional_args = function(opts)
+							return { "--hidden", "--glob", "!**/.git/*" }
+						end,
+					},
+					grep_string = {
+						additional_args = function(opts)
+							return { "--hidden", "--glob", "!**/.git/*" }
+						end,
 					},
 				},
 			})
