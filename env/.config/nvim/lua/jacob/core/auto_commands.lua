@@ -7,6 +7,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+  group = vim.api.nvim_create_augroup("active_cursorline", { clear = true }),
+  callback = function()
+    vim.opt_local.cursorline = true
+  end
+})
+
 local function sync_system_theme()
 	-- Execute the macOS command to check for Dark mode
 	-- We redirect stderr to /dev/null because the command fails in Light mode
