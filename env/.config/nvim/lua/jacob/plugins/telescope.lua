@@ -30,32 +30,48 @@ return {
 				return
 			end
 
+			local bottom_pane_config = {
+				layout_strategy = "bottom_pane",
+				layout_config = {
+					height = 0.4,
+					prompt_position = "bottom",
+				},
+				border = true,
+				sorting_strategy = "descending",
+				hidden = true,
+				path_display = { "filename_first" },
+				dynamic_preview_title = true,
+				mappings = {
+					i = {
+						["<C-d>"] = actions.delete_buffer,
+						["<C-y>"] = actions.select_default,
+						["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+					},
+				},
+			}
+
 			telescope.setup({
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
 				},
-				defaults = {
-					path_display = { "filename_first" },
-					dynamic_preview_title = true,
-					mappings = {
-						i = {
-							["<C-d>"] = actions.delete_buffer,
-							["<C-y>"] = actions.select_default,
-							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-						},
-					},
-				},
+				defaults = bottom_pane_config,
 				pickers = {
 					live_grep = {
-						additional_args = function(opts)
-							return { "--hidden", "--glob", "!**/.git/*" }
+						file_ignore_patterns = { "node_modules", ".git" },
+						additional_args = function(_)
+							return { "--hidden" }
 						end,
 					},
+					find_files = {
+						file_ignore_patterns = { "node_modules", ".git" },
+						hidden = true,
+					},
 					grep_string = {
-						additional_args = function(opts)
-							return { "--hidden", "--glob", "!**/.git/*" }
+						file_ignore_patterns = { "node_modules", ".git" },
+						additional_args = function(_)
+							return { "--hidden" }
 						end,
 					},
 				},
