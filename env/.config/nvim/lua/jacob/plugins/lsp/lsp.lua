@@ -37,6 +37,7 @@ return {
 				opts.desc = "Show documentation for what is under the cursor"
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover({ border = "rounded" })
+					vim.lsp.buf.document_highlight()
 				end, opts)
 
 				opts.desc = "Restart LSP"

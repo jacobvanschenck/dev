@@ -6,7 +6,10 @@ local keymap = vim.keymap
 keymap.set("i", "<C-c>", "<Esc>")
 
 -- clear search highlights
-keymap.set("n", "<Esc>", ":nohl<CR>")
+keymap.set("n", "<Esc>", function()
+	vim.cmd("nohlsearch")
+	vim.lsp.buf.clear_references()
+end)
 -- keymap.set("n", "<CR>", function()
 -- 	if vim.opt.hlsearch:get() then
 -- 		vim.cmd.nohl()
