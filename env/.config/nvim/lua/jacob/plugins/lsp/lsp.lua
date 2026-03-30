@@ -17,7 +17,7 @@ return {
 		})
 
 		-- Disable this server
-		-- Swap for tsgo to switch typescript lsp
+		-- vim.lsp.enable("tsgo", false)
 		vim.lsp.enable("ts_ls", false)
 
 		vim.api.nvim_create_autocmd("LspAttach", {
