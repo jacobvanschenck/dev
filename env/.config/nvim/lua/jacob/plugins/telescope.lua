@@ -107,6 +107,8 @@ return {
 					cwd = vim.fn.stdpath("config"),
 				})
 			end, { desc = "[S]each Nvim [C]onfig" })
+
+			require("jacob.config.telescope.multigrep").setup()
 		end,
 	},
 }
