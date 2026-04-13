@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+tmux rename-window build
+tmux split-window -h 
+tmux send-keys -t 1 opencode C-m
+tmux send-keys -t 0 "nvim ." C-m
+tmux select-pane -t 0
+
 tmux new-window -dn cmd
-tmux new-window -dn opencode
-tmux send-keys -t "opencode" "opencode" C-m
-tmux rename-window nvim
-nvim .
 clear
 
