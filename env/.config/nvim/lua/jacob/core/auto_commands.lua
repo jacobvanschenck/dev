@@ -26,11 +26,10 @@ vim.api.nvim_create_autocmd("FileType", {
 local function sync_system_theme()
 	-- Execute the macOS command to check for Dark mode
 	-- We redirect stderr to /dev/null because the command fails in Light mode
-	local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
-	local result = handle:read("*a"):gsub("%s+", "")
-	handle:close()
+	local handle = vim.fn.system("defaults read -g AppleInterfaceStyle 2>/dev/null")
+	local mode = string.gsub(handle, "%s+", "")
 
-	if result == "Dark" then
+	if mode == "Dark" then
 		vim.o.background = "dark"
 	else
 		vim.o.background = "light"
