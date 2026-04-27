@@ -33,11 +33,14 @@ copy_dir(){
   from=$1
   to=$2
 
+  execute mkdir -p "$to"
+  
   pushd $from > /dev/null
   dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
   for dir in $dirs; do
-    execute rm -rf $to/$dir
-    execute cp -r $dir $to/$dir
+	  clean_dir=${dir#./}
+    execute rm -rf $to/$clean_dir
+    execute cp -r $dir $to/$clean_dir
   done
   popd > /dev/null
 }
@@ -46,6 +49,8 @@ copy_file(){
   from=$1
   to=$2
   name=$(basename $from)
+
+  execute mkdir -p "$to"
 
   execute rm $to/$name
   execute cp $from $to/$name
