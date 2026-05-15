@@ -1,104 +1,48 @@
 return {
 	{
-		"hrsh7th/nvim-cmp", -- completion plugins
+		"saghen/blink.cmp",
 		dependencies = {
-			"onsails/lspkind.nvim", -- vs-code like pictograms
-			"hrsh7th/cmp-buffer", -- source for text in buffer
-			"hrsh7th/cmp-path", -- source for file system paths
-			"hrsh7th/cmp-nvim-lsp",
-			{
-				"L3MON4D3/LuaSnip",
-				build = "make install_jsregexp",
-				dependencies = {
-					"saadparwaiz1/cmp_luasnip", -- for autocompletion
-					"rafamadriz/friendly-snippets",
-				},
-			}, -- snippet engine
+			"saghen/blink.lib",
 		},
-		config = function()
-			-- import nvim-cmp plugin safely
-			local cmp_status, cmp = pcall(require, "cmp")
-			if not cmp_status then
-				return
-			end
-
-			-- -- import luasnip plugin safely
-			local luasnip = require("luasnip")
-
-			-- import lspkind plugin safely
-			local lspkind_status, lspkind = pcall(require, "lspkind")
-			if not lspkind_status then
-				return
-			end
-
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			cmp.setup({
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				completion = {
-					completeopt = "menu,menuone,preview,noselect",
-				},
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-					["<C-e>"] = cmp.mapping.abort(), -- close completion window
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				}),
-
-				-- sources for autocompletion
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" }, -- lsp
-					{ name = "luasnip" },
-					{ name = "buffer" }, -- text within current buffer
-					{ name = "path" }, -- file system paths
-				}),
-				-- configure lspkind for vs-code like icons
-				formatting = {
-					format = lspkind.cmp_format({
-						maxwidth = 50,
-						ellipsis_char = "...",
-					}),
-				},
-			})
-
-			-- Setup up vim-dadbod
-			cmp.setup.filetype({ "sql" }, {
-				sources = {
-					{ name = "vim-dadbod-completion" },
-					{ name = "buffer" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				},
-			})
-
-			luasnip.config.set_config({
-				history = false,
-				updateevents = "TextChanged,TextChangedI",
-			})
-
-			luasnip.filetype_extend("javascript", { "typescriptreact" })
-			luasnip.filetype_extend("typescript", { "typescriptreact" })
-
-			vim.keymap.set({ "i", "s" }, "<c-k>", function()
-				if luasnip.expand_or_jumpable() then
-					luasnip.expand_or_jump()
-				end
-			end, { silent = true })
-
-			vim.keymap.set({ "i", "s" }, "<c-j>", function()
-				if luasnip.jumpable(-1) then
-					luasnip.jump(-1)
-				end
-			end, { silent = true })
+		build = function()
+			-- build the fuzzy matcher, wait up to 60 seconds
+			-- you can use `gb` in `:Lazy` to rebuild the plugin as needed
+			require("blink.cmp").build():wait(60000)
 		end,
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = { preset = "default" },
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = {
+				trigger = { show_on_trigger_character = true },
+				documentation = { auto_show = true, window = { border = "single" } },
+				menu = { border = "single" },
+				ghost_text = { enabled = true },
+			},
+
+			-- (Default) list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = { default = { "lsp", "buffer", "path" } },
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"`
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "rust" },
+		},
 	},
 }
