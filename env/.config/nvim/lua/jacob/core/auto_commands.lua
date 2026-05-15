@@ -44,5 +44,37 @@ vim.api.nvim_create_autocmd({ "FocusGained", "VimResume", "WinEnter" }, {
 	end,
 })
 
+-- Enable treesitter
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+	pattern = {
+		"astro",
+		"bash",
+		"elixir",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"json",
+		"lua",
+		"markdown",
+		"mdx",
+		"python",
+		"query",
+		"regex",
+		"solidity",
+		"typescript",
+		"typescriptreact",
+		"terraform",
+		"vim",
+		"vimdoc",
+		"yaml",
+		"go",
+	},
+	callback = function()
+		vim.treesitter.start()
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
+})
+
 -- Run once on startup
 sync_system_theme()
