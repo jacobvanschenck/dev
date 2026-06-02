@@ -11,6 +11,7 @@ return {
 			"bash",
 			"elixir",
 			"html",
+			"odin",
 			"javascript",
 			"jsdoc",
 			"json",
