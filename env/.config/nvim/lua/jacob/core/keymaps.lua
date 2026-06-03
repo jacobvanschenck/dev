@@ -67,3 +67,37 @@ keymap.set("n", "<C-p>", "<cmd>cprev<cr>", { desc = "Previous quickfix" })
 keymap.set("n", "<C-f>", "<cmd>!tmux neww tmux-sessionizer<CR>", { desc = "Tmux sessionizer" })
 
 keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer" })
+
+-- LSP
+keymap.set("n", "grb", function()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local current_file = vim.api.nvim_buf_get_name(current_buf)
+
+	vim.lsp.buf.references(nil, {
+		on_list = function(options)
+			local filtered_items = {}
+
+			-- Intercept and filter the standard LSP results
+			for _, item in ipairs(options.items) do
+				if item.bufnr == current_buf or item.filename == current_file then
+					table.insert(filtered_items, item)
+				end
+			end
+
+			if #filtered_items == 0 then
+				vim.notify("No references found in the current buffer.", vim.log.levels.INFO)
+				return
+			end
+
+			-- Push the filtered results to the Quickfix list
+			vim.fn.setqflist({}, " ", {
+				title = "Buffer References",
+				items = filtered_items,
+				context = options.context,
+			})
+
+			-- Open the Quickfix window
+			vim.cmd("copen")
+		end,
+	})
+end, { desc = "LSP references (current buffer only)" })
