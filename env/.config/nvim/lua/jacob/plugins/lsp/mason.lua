@@ -22,6 +22,7 @@ return {
 					"lua_ls",
 					"gopls",
 					"rust_analyzer",
+					"js-debug-adapter",
 					"rustywind", -- Tailwind class sorter
 					"stylua", -- lua formatter
 					"tailwindcss",
