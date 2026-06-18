@@ -2,11 +2,18 @@ return {
 	"mfussenegger/nvim-dap",
 	config = function()
 		local dap = require("dap")
-		-- local runtime = vim.uv.fs_stat("yarn.lock") and "yarn" or "npm"
 		local runtime = "yarn"
 
 		vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
 		vim.keymap.set("n", "<leader>dc", dap.continue, {})
+
+		vim.keymap.set("n", "<F3>", dap.continue)
+		vim.keymap.set("n", "<F4>", dap.step_into)
+		vim.keymap.set("n", "<F13>", dap.step_over)
+		vim.keymap.set("n", "<F16>", dap.step_out)
+		vim.keymap.set("n", "<F17>", dap.step_back)
+		vim.keymap.set("n", "<F18>", dap.restart)
+		vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint)
 
 		if not dap.adapters["pwa-node"] then
 			dap.adapters["pwa-node"] = {
@@ -70,68 +77,29 @@ return {
 			end
 		end
 
-		-- https://emojipedia.org/en/stickers/search?q=circle
-		-- vim.fn.sign_define("DapBreakpoint", {
-		-- 	text = "⚪",
-		-- 	texthl = "DapBreakpointSymbol",
-		-- 	linehl = "DapBreakpoint",
-		-- 	numhl = "DapBreakpoint",
-		-- })
-		--
-		-- vim.fn.sign_define("DapStopped", {
-		-- 	text = "🔴",
-		-- 	texthl = "yellow",
-		-- 	linehl = "DapBreakpoint",
-		-- 	numhl = "DapBreakpoint",
-		-- })
-		--
-		-- vim.fn.sign_define("DapBreakpointRejected", {
-		-- 	text = "⭕",
-		-- 	texthl = "DapStoppedSymbol",
-		-- 	linehl = "DapBreakpoint",
-		-- 	numhl = "DapBreakpoint",
-		-- })
-
-		local dapui = require("dapui")
-		-- Initialize the UI
-		dapui.setup({
-			expand_lines = true,
-			floating = {
-				border = "rounded",
-			},
-			render = { max_type_length = 60, max_value_lines = 200 },
-			layouts = {
-				{
-					elements = {
-						{
-							id = "scopes",
-							size = 0.7,
-						},
-						{
-							id = "console",
-							size = 0.3,
-						},
-					},
-					position = "bottom",
-					size = 20,
-				},
+		local dapview = require("dap-view")
+		-- https://igorlfs.github.io/nvim-dap-view/configuration
+		dapview.setup({
+			winbar = {
+				sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+				default_section = "console",
 			},
 		})
 
 		-- Tell dapui to automatically open and close when debugging starts/stops
 		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open()
+			dapview.open()
 		end
 		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
+			dapview.close()
 		end
 		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
+			dapview.close()
 		end
 	end,
 
 	dependencies = {
-		"rcarriga/nvim-dap-ui",
+		"igorlfs/nvim-dap-view",
 		"nvim-neotest/nvim-nio",
 	},
 }
