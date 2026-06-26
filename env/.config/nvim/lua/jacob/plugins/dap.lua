@@ -4,12 +4,11 @@ return {
 		local dap = require("dap")
 		local runtime = "yarn"
 
-		vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
 		vim.keymap.set("n", "<leader>dc", dap.continue, {})
 
 		vim.keymap.set("n", "<F3>", dap.continue)
-		vim.keymap.set("n", "<F4>", dap.step_into)
-		vim.keymap.set("n", "<F13>", dap.step_over)
+		vim.keymap.set("n", "<F4>", dap.step_over)
+		vim.keymap.set("n", "<F13>", dap.step_into)
 		vim.keymap.set("n", "<F16>", dap.step_out)
 		vim.keymap.set("n", "<F17>", dap.step_back)
 		vim.keymap.set("n", "<F18>", dap.restart)
@@ -83,6 +82,10 @@ return {
 			winbar = {
 				sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
 				default_section = "console",
+			},
+			windows = {
+				size = 0.4,
+				position = "below",
 			},
 		})
 

@@ -30,3 +30,6 @@ opt.splitbelow = true
 
 -- considers hello-hello one word
 opt.iskeyword:append("-")
+
+-- Replaces the ~ with an empty space
+vim.opt.fillchars:append({ eob = " " })

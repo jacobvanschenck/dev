@@ -51,11 +51,6 @@ return {
 			}
 
 			telescope.setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
-					},
-				},
 				defaults = bottom_pane_config,
 				pickers = {
 					live_grep = {
