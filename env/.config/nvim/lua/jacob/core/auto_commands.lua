@@ -79,3 +79,30 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Run once on startup
 sync_system_theme()
+
+-- User command for reload script
+vim.api.nvim_create_user_command("ReloadProject", function()
+	local root = vim.fs.root(0, { ".git" })
+
+	if not root then
+		vim.notify("Could not find project root", vim.log.levels.ERROR)
+		return
+	end
+
+	local reload_script = root .. "/reload"
+
+	if vim.fn.executable(reload_script) == 0 then
+		vim.notify("No executable reload script found", vim.log.levels.ERROR)
+		return
+	end
+
+	vim.system({ reload_script }, { cwd = root }, function(result)
+		vim.schedule(function()
+			if result.code == 0 then
+				vim.notify("Reload completed")
+			else
+				vim.notify(result.stderr, vim.log.levels.ERROR)
+			end
+		end)
+	end)
+end, {})

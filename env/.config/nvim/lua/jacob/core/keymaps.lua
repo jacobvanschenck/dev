@@ -44,6 +44,9 @@ keymap.set("n", "<leader><leader>l", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 -- open mason
 keymap.set("n", "<leader><leader>m", "<cmd>Mason<cr>", { desc = "Open Mason" })
 
+-- run reload script
+keymap.set("n", "<leader><leader>r", "<cmd>ReloadProject<cr>", { desc = "Reload project" })
+
 -- delete single character without coping into register
 keymap.set("n", "x", '"_x')
 
