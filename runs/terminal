@@ -14,3 +14,6 @@ brew install jesseduffield/lazygit/lazygit
 brew install docker
 
 brew install starship
+
+brew install --cask ghostty
+brew install herdr
