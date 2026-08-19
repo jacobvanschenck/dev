@@ -1,0 +1,10 @@
+[theme]
+name = 'rose-pine'
+
+[keys]
+cycle_pane_previous = 'prefix+;'
+switch_workspace = "prefix+shift+1..9"
+focus_agent = 'prefix+ctrl+1..9'
+
+[ui.toast]
+delivery = 'herdr'
