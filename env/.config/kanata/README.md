@@ -121,3 +121,9 @@ In case you need to stop Kanata from running via launchctl, use at the terminal:
 
 `sudo launchctl bootout system /Library/LaunchDaemons/com.example.kanata.plist`
 Of course, to interrupt at any time, press left control + space + escape at their original positions.
+
+## 6. Known Issues
+When you upgrade via homebrew, you **MUST**  remove and re-add the path to the binary.
+
+> From the error logs:
+> Note: if you moved, renamed, or upgraded the kanata binary, macOS pins the old path and you must remove the stale entry and re-add the current binary. This is the commonly-missed second permission behind the `IOHIDDeviceOpen error: (iokit/common) not permitted` failure (issue #1211)
