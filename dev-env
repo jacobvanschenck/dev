@@ -64,3 +64,4 @@ copy_file ./env/.ready-tmux $HOME
 copy_file ./env/.zshrc $HOME
 copy_file ./env/.zshenv $HOME
 copy_file ./env/.config/starship.toml $HOME/.config
+copy_file ./env/.agents/AGENTS.md $HOME/.agents
