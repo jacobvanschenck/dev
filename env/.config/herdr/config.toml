@@ -5,6 +5,8 @@ name = 'rose-pine'
 cycle_pane_previous = 'prefix+;'
 switch_workspace = "prefix+shift+1..9"
 focus_agent = 'prefix+ctrl+1..9'
+next_workspace = 'prefix+]'
+previous_workspace = 'prefix+['
 
 [ui.toast]
 delivery = 'herdr'
