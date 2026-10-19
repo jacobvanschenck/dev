@@ -12,7 +12,7 @@ return {
 				javascriptreact = { "biome", "rustywind" },
 				typescriptreact = { "biome", "rustywind" },
 				json = { "biome" },
-				astro = { "biome", "rustywind" },
+				astro = {},
 				css = { "biome", "rustywind" },
 				html = { "biome", "rustywind" },
 				yaml = { "yamlfix" },
@@ -37,6 +37,7 @@ return {
 					return
 				end
 				return {
+					-- lsp_format = "first", -- Runs Astro LSP first, then rustywind
 					lsp_fallback = true,
 					async = false,
 					timeout_ms = 1000,
