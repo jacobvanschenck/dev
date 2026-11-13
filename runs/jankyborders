@@ -1,0 +1,5 @@
+#!/bin/bash
+
+brew trust --formula felixkratz/formulae/borders
+brew tap FelixKratz/formulae
+brew install borders

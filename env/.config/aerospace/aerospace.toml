@@ -8,7 +8,14 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    'exec-and-forget borders active_color=0xffc4a7e7 inactive_color=0xff6e6a86 width=8',
+    'layout --workspace 1 --root h_tiles',
+    'layout --workspace 2 --root h_tiles',
+    'layout --workspace 3 --root h_tiles',
+    'layout --workspace 4 --root h_tiles',
+    'layout --workspace 5 --root h_tiles'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -77,8 +84,8 @@ key-mapping.preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-gaps.inner.horizontal = 8
-gaps.inner.vertical =   8
+gaps.inner.horizontal = 16
+gaps.inner.vertical =   16
 gaps.outer.left =       8
 gaps.outer.bottom =     8
 gaps.outer.top =        8
@@ -154,6 +161,9 @@ gaps.outer.right =      8
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+
+    alt-c = 'close --quit-if-last-window'
+    alt-f = 'fullscreen'
   
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
