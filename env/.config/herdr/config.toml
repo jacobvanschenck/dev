@@ -10,3 +10,9 @@ previous_workspace = 'prefix+['
 
 [ui.toast]
 delivery = 'herdr'
+
+[ui.sidebar.spaces]
+rows = [
+  ["$num", "state_icon", "workspace"],
+  ["branch", "git_status"],
+]
